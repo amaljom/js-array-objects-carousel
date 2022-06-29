@@ -102,3 +102,55 @@ images.forEach((element, index) => {
         <img class="posizione rounded-3" src=" ${element.url}" alt="IMMAGINE NON TROVATA">`
     }
 });
+
+const autoNext = document.getElementById('auto-next');
+const autoPause = document.getElementById('auto-pause');
+const autoPrevious = document.getElementById('auto-previous');
+
+autoNext.addEventListener('click', function(){
+    const clock = setInterval(goNext, 1000);
+    
+    function goNext() {
+    
+        listImg[activeIndex].classList.remove('active');
+        listImg[activeIndex].classList.add('d-none');
+        list[activeIndex].classList.toggle('posizione-active');
+        activeIndex++;
+    
+        if(activeIndex===images.length){
+            activeIndex=0;
+        }
+        list[activeIndex].classList.toggle('posizione-active');
+        listImg[activeIndex].classList.remove('d-none');
+        listImg[activeIndex].classList.add('active');  
+    }
+    autoPrevious.addEventListener('click', function(){
+        clearInterval(clock);
+    });
+    autoPause.addEventListener('click', function(){
+        clearInterval(clock);
+    });
+});
+autoPrevious.addEventListener('click', function(){
+    const lock = setInterval(goBack, 1000);
+    function goBack() {
+       
+        listImg[activeIndex].classList.remove('active');
+        listImg[activeIndex].classList.add('d-none');
+        list[activeIndex].classList.toggle('posizione-active');
+
+        if(activeIndex===0){
+            activeIndex=images.length;
+        }
+        activeIndex--;
+        list[activeIndex].classList.toggle('posizione-active');
+        listImg[activeIndex].classList.remove('d-none');
+        listImg[activeIndex].classList.add('active');
+    }
+    autoNext.addEventListener('click', function(){
+        clearInterval(lock);
+    });
+    autoPause.addEventListener('click', function(){
+        clearInterval(lock);
+    });
+});
