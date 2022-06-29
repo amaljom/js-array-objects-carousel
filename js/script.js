@@ -109,7 +109,9 @@ const autoPrevious = document.getElementById('auto-previous');
 
 autoNext.addEventListener('click', function(){
     const clock = setInterval(goNext, 1000);
-    
+    autoNext.addEventListener('click', function(){
+        clearInterval(clock);
+    });
     function goNext() {
     
         listImg[activeIndex].classList.remove('active');
@@ -133,8 +135,10 @@ autoNext.addEventListener('click', function(){
 });
 autoPrevious.addEventListener('click', function(){
     const lock = setInterval(goBack, 1000);
+    autoPrevious.addEventListener('click', function(){
+        clearInterval(lock);
+    });
     function goBack() {
-       
         listImg[activeIndex].classList.remove('active');
         listImg[activeIndex].classList.add('d-none');
         list[activeIndex].classList.toggle('posizione-active');
