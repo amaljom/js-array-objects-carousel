@@ -29,10 +29,49 @@ const images = [
         description: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Et temporibus voluptatum suscipit tempore aliquid deleniti aut veniam.'
     },
 ];
-
+// *INSERIAMO TUTTE LE IMMAGINI NEL DOM
 const imgContainer = document.getElementById('contenitore-immagini');
+const listImg = imgContainer.children;
+activeIndex=0;
+images.forEach((element, index) => {
+    if (activeIndex==index) {
+        imgContainer.innerHTML += `
+        <img class="active stile-css rounded-3 text-center" src=" ${element.url}" alt="IMMAGINE NON TROVATA">`
+    }
+    else{
+        imgContainer.innerHTML += `
+        <img class="d-none stile-css rounded-3 text-center" src=" ${element.url}" alt="IMMAGINE NON TROVATA">`
+    }
+});
+//* BOTTONI PER ANDAREA AVANTI O INDIETRO
+const btnNext= document.getElementById('next-button');
+const btnPrev= document.getElementById('previous-button');
+//* FUNZIONE PER ANDARE AVANTI
+btnNext.addEventListener('click', function(){
+    
+    listImg[activeIndex].classList.remove('active');
+    listImg[activeIndex].classList.add('d-none');
+    activeIndex++;
 
-images.forEach((element) => {
-    imgContainer.innerHTML += `
-    <img src=" ${element.url}" alt="IMMAGINE NON TROVATA">`
+    if(activeIndex===images.length){
+        activeIndex=0;
+    }
+
+    listImg[activeIndex].classList.remove('d-none');
+    listImg[activeIndex].classList.add('active');  
+});
+//* FUNZIONE PER ANDARE INDIETRO
+btnPrev.addEventListener('click', function(){
+    
+    listImg[activeIndex].classList.remove('active');
+    listImg[activeIndex].classList.add('d-none');
+    
+
+    if(activeIndex===0){
+        activeIndex=images.length;
+    }
+    activeIndex--;
+
+    listImg[activeIndex].classList.remove('d-none');
+    listImg[activeIndex].classList.add('active');  
 });
