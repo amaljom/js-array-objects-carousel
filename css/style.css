@@ -5,3 +5,28 @@
 .active{
     display: inline;
 }
+.posizione-thumbnail{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    bottom: 190px;
+}
+.posizione{
+    width: 75px;
+    padding: 2px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.posizione-active{
+    width: 95px;
+    height: 70px;
+}
+.posizione-scritte{
+    position: relative;
+    bottom: 774px;
+}
+.pulsanti{
+    position: relative;
+    bottom: 77px;
+}

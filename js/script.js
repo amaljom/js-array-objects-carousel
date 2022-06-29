@@ -36,11 +36,23 @@ activeIndex=0;
 images.forEach((element, index) => {
     if (activeIndex==index) {
         imgContainer.innerHTML += `
-        <img class="active stile-css rounded-3 text-center" src=" ${element.url}" alt="IMMAGINE NON TROVATA">`
+        <div class="active">
+            <img class="stile-css rounded-3 text-center" src=" ${element.url}" alt="IMMAGINE NON TROVATA">
+            <div class="posizione-scritte">
+                <h2 class="fw-bolder text-white">${element.title}</h2>
+                <p class="fw-bolder text-white">${element.description}</p>
+            </div>
+        </div>`
     }
     else{
         imgContainer.innerHTML += `
-        <img class="d-none stile-css rounded-3 text-center" src=" ${element.url}" alt="IMMAGINE NON TROVATA">`
+        <div class="d-none">
+            <img class="stile-css rounded-3 text-center" src=" ${element.url}" alt="IMMAGINE NON TROVATA">
+            <div class="posizione-scritte">
+                <h2 class="fw-bolder text-white">${element.title}</h2>
+                <p class="fw-bolder text-white">${element.description}</p>
+            </div>
+        </div>`
     }
 });
 //* BOTTONI PER ANDAREA AVANTI O INDIETRO
@@ -51,12 +63,13 @@ btnNext.addEventListener('click', function(){
     
     listImg[activeIndex].classList.remove('active');
     listImg[activeIndex].classList.add('d-none');
+    list[activeIndex].classList.toggle('posizione-active');
     activeIndex++;
 
     if(activeIndex===images.length){
         activeIndex=0;
     }
-
+    list[activeIndex].classList.toggle('posizione-active');
     listImg[activeIndex].classList.remove('d-none');
     listImg[activeIndex].classList.add('active');  
 });
@@ -65,13 +78,27 @@ btnPrev.addEventListener('click', function(){
     
     listImg[activeIndex].classList.remove('active');
     listImg[activeIndex].classList.add('d-none');
-    
+    list[activeIndex].classList.toggle('posizione-active');
 
     if(activeIndex===0){
         activeIndex=images.length;
     }
     activeIndex--;
-
+    list[activeIndex].classList.toggle('posizione-active');
     listImg[activeIndex].classList.remove('d-none');
     listImg[activeIndex].classList.add('active');  
+});
+// THUMBNAIL
+const thumbnail= document.getElementById('container-thumbnail');
+const list= thumbnail.children;
+
+images.forEach((element, index) => {
+    if (activeIndex==index) {
+        thumbnail.innerHTML += `
+        <img class="posizione-active posizione rounded-3" src=" ${element.url}" alt="IMMAGINE NON TROVATA">`
+    }
+    else{
+        thumbnail.innerHTML += `
+        <img class="posizione rounded-3" src=" ${element.url}" alt="IMMAGINE NON TROVATA">`
+    }
 });
